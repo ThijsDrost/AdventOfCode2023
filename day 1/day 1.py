@@ -1,7 +1,7 @@
 import numpy as np
 
 with open(r'C:\Users\20222772\PycharmProjects\AdventOfCode2023\day 1\input.txt', 'r') as file:
-    lines = [line.removesuffix('\n') for line in file.readlines()]
+    lines = [line.removesuffix('\n') for line in file]
 
 # %%
 total = 0
