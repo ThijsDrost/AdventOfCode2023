@@ -37,48 +37,23 @@ def identifier(hand: str, joker: bool):
     return 7
 
 
-def comparer1(hand1, hand2):
+def comparer(hand1, hand2, hand_values):
     if hand1[0] > hand2[0]:
         return -1
     if hand1[0] < hand2[0]:
         return 1
     for card1, card2 in zip(hand1[1], hand2[1]):
-        if hand_values1[card1] > hand_values1[card2]:
+        if hand_values[card1] > hand_values[card2]:
             return -1
-        if hand_values1[card1] < hand_values1[card2]:
+        if hand_values[card1] < hand_values[card2]:
             return 1
     return 0
 
 
-def comparer2(hand1, hand2):
-    if hand1[0] > hand2[0]:
-        return -1
-    if hand1[0] < hand2[0]:
-        return 1
-    for card1, card2 in zip(hand1[1], hand2[1]):
-        if hand_values2[card1] > hand_values2[card2]:
-            return -1
-        if hand_values2[card1] < hand_values2[card2]:
-            return 1
-    return 0
-
-
-values1 = []
-values2 = []
-with open(loc, 'r') as file:
-    for line in file:
-        hand, num = line.removesuffix('\n').split()
-        values1.append((identifier(hand, False), hand, int(num)))
-        values2.append((identifier(hand, True), hand, int(num)))
-
-values1.sort(key=cmp_to_key(comparer1))
-total1 = 0
-for i in range(len(values1)):
-    total1 += values1[i][2] * (i+1)
-print(total1)
-
-values2.sort(key=cmp_to_key(comparer2))
-total2 = 0
-for i in range(len(values2)):
-    total2 += values2[i][2] * (i+1)
-print(total2)
+for h_v, jok in zip((hand_values1, hand_values2), (False, True)):
+    values = [(identifier(line.split()[0], jok), line.split()[0], int(line.split()[1])) for line in open("input.txt").read().split("\n") if line]
+    values.sort(key=cmp_to_key(lambda x, y: comparer(x, y, h_v)))
+    total = 0
+    for i in range(len(values)):
+        total += values[i][2] * (i + 1)
+    print(total)
