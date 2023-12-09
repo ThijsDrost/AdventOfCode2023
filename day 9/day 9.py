@@ -7,5 +7,5 @@ def difference(values, operator):
 
 
 lines = [list(map(int, line.split())) for line in open('input.txt').read().split('\n') if line]
-print(f'part 1: {sum(list(map(lambda x: difference(x, lambda y, z: y[-1] + z), lines)))}')
-print(f'part 12 {sum(list(map(lambda x: difference(x, lambda y, z: y[0] - z), lines)))}')
+print(f'part 1: {sum(map(lambda x: difference(x, lambda y, z: y[-1] + z), lines))}')
+print(f'part 12 {sum(map(lambda x: difference(x, lambda y, z: y[0] - z), lines))}')
