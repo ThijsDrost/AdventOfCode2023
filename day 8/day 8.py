@@ -16,6 +16,6 @@ for i in range(len(locations)):
         if locations[i][-1] == 'Z':
             if starts[i] == 'AAA':
                 print(f'part 1: {index}')
-            result = result*index//math.gcd(result, index)  # lcm
+            result = math.lcm(result, index)
             break
 print(f'part 2: {result}')
