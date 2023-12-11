@@ -51,9 +51,7 @@ def comparer(hand1, hand2, hand_values):
 
 
 for h_v, jok in zip((hand_values1, hand_values2), (False, True)):
-    values = [(identifier(line.split()[0], jok), line.split()[0], int(line.split()[1])) for line in open("input.txt").read().split("\n") if line]
-    values.sort(key=cmp_to_key(lambda x, y: comparer(x, y, h_v)))
-    total = 0
-    for i in range(len(values)):
-        total += values[i][2] * (i + 1)
-    print(total)
+    values = sorted([(identifier(line[0], jok), line[0], int(line[1])) for line in
+                     map(lambda x: x.split(), open("input.txt").read().split("\n")) if line],
+                    key=cmp_to_key(lambda x, y: comparer(x, y, h_v)))
+    print(sum([val[2] * (i + 1) for i, val in enumerate(values)]))
