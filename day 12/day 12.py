@@ -1,6 +1,5 @@
 import functools
 
-
 @functools.cache
 def possible(string, lister: tuple):
     total = 0
@@ -9,7 +8,7 @@ def possible(string, lister: tuple):
             return 1
         else:
             return 0
-    if len(string) < sum(lister):
+    if len(string) < (sum(lister)+len(lister)-1):
         return 0
     if (len(string) == lister[0]) and (string.count('.') == 0) and (len(lister) == 1):
         return 1
