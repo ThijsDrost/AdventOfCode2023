@@ -1,4 +1,4 @@
-def read_input(loc: str) -> (tuple[tuple[int, ...], ...], tuple[int, int], int):
+def read_input(loc: str) -> (tuple[tuple[int, ...], ...], tuple[int, int]):
     grid = [list(line) for line in open(loc, 'r').read().split('\n') if line]
 
     start = 0, 0
@@ -10,21 +10,7 @@ def read_input(loc: str) -> (tuple[tuple[int, ...], ...], tuple[int, int], int):
     if start == (0, 0):
         raise Exception('No start found')
     grid = tuple(tuple(line) for line in grid)
-
-    per_grid = 0
-    top_start = start[0] % 2, start[1] % 2
-    for i in range(top_start[0], len(grid), 2):
-        for j in range(top_start[1], len(grid[0]), 2):
-            if grid[i][j] == '.':
-                per_grid += 1
-
-    top_start = (start[0] + 1) % 2, (start[1] + 1) % 2
-    for i in range(top_start[0], len(grid), 2):
-        for j in range(top_start[1], len(grid[0]), 2):
-            if grid[i][j] == '.':
-                per_grid += 1
-
-    return grid, start, per_grid
+    return grid, start
 
 
 def spots(grid: tuple[tuple[int, ...], ...], steps: int, start: tuple[int, int], start_steps: int):
@@ -49,7 +35,7 @@ def spots(grid: tuple[tuple[int, ...], ...], steps: int, start: tuple[int, int],
     return num
 
 
-grid, start, _ = read_input('input.txt')
+grid, start = read_input('input.txt')
 print('Part 1:', spots(grid, 64, start, 0) - 1)
 
 values = [spots(grid, 65, start, 0), spots(grid, 65 + 131, start, 0), spots(grid, 65 + 131 * 2, start, 0)]
