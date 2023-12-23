@@ -74,7 +74,7 @@ def do_part(loc, directional):
         map_nodes[(ends[0][0], ends[0][1])].append(((-1, -1), ends[1]))
 
     paths = []
-    queue = deque([(x[0], x[1], set((x[0],))) for x in start_nodes])
+    queue = deque([(x[0], x[1], {x[0]}) for x in start_nodes])
     while queue:
         loc, steps, been = queue.popleft()
         if loc == (-1, -1):
